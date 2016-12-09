@@ -14,6 +14,6 @@ Exstensible Markup Language (XML) is widely used within the DoD to share informa
 
 ## Overview
 
-JSON-SMS facilitates marking information based upon the concept of Banner Lines (Resource Level) and Portion Markings (Portion Level) as described in the DoDM 5200.01 volumes.  JSON-SMS provides the attributes necessary for consumers to construct Banner Lines and Portion Markings to be used when displaying the information.  In addition, these attributes can be used when making access/dissemination decision.
+JSON-SMS facilitates marking information based upon the concept of Banner Lines (Resource Level) and Portion Markings (Portion Level) as described in the DoDM 5200.01 volumes.  JSON-SMS provides the attributes necessary for consumers to construct Banner Lines and Portion Markings to be used when displaying the information.  In addition, these attributes can be used when making access/dissemination decisions.
 
 JSON-SMS is only a marking standard.  It remains the responsibility of the data owner(s) to ensure information is appropriately marked and those in possession of classified information or CUI are responsible for its protection.

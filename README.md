@@ -24,7 +24,7 @@ JSON-SMS attributes will be grouped together to form an object.  This object can
 
 The object is identified at the resource level using the `jsms` key.  This key is placed at the root level of the JSON document.
 
-** Marking at the resource level (equivalent to Banner Line for overall document classification) **
+**Marking at the resource level (equivalent to Banner Line for overall document classification)**
 ```json
 {
   "jsms":{
@@ -38,7 +38,7 @@ The object is identified at the resource level using the `jsms` key.  This key i
 
 The object is identified at the portion level using the attribute name plus the `_jsms` key suffix.  For example, if the key for the portion we wish to mark is `description`, the key for the JSMS object would be `description_jsms`.
 
-** Marking at the portion level (equivalent to Portion Marking for identifying portions within a document) **
+**Marking at the portion level (equivalent to Portion Marking for identifying portions within a document)**
 ```json
 {
   ...
@@ -75,7 +75,7 @@ The possible values for `classification` are:
 | TS | TOP SECRET |
 | U | UNCLASSIFIED |
 
-** Example **
+**Example**
 ```json
   "classification": "U"
 ```
@@ -84,7 +84,7 @@ The possible values for `classification` are:
 
 The `ownerProducer` attribute (Array[String]) is used to identify one or more national governments or international organizations that have purview over the classification marking of a resource or portion therein. This attribute is always used in conjunction with the `ownerProducer` attribute.  Taken together, these two attributes specify the classification category and type of classification (US, non-US, or Joint).
 
-** Example **
+**Example**
 ```json
   "ownerProducer": [
     "USA"
@@ -126,7 +126,7 @@ The possible values for `sciControls` are:
 | SI-G | SI-GAMMA |
 | TK | TALENT KEYHOLE |
 
-** Example **
+**Example**
 ```json
   "sciControls": [
     "RSV-540"

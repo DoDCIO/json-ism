@@ -29,6 +29,8 @@ The object is identified at the resource level using the `ism` key.  This key is
 {
   "ism":{
     "version": "1",
+    "classification": "U",
+    "ownerProducer": "USA"
   },
   "data":{
     ...
@@ -46,7 +48,8 @@ The object is identified at the portion level using the attribute name plus the 
     "programName": "Nonsensitive Program Name",
     "description": "Sensitive Description",
     "description_ism": {
-      -- ISM Attributes --
+      "classification": "U",
+      "ownerProducer": "USA"
     },
     ...
   }
@@ -213,3 +216,27 @@ The possible values for `nonICmarkings` are:
 | LES | LAW ENFORCEMENT SENSITIVE |
 | LES-NF | LAW ENFORCEMENT SENSITIVE NOFORN |
 | SSI | SENSITIVE SECURITY INFORMATION |
+
+#### Display Only To
+
+The `displayOnlyTo` attribute (Array[String]) identifies one or more countries and/or international organizations to which classified information may be displayed but NOT released based on established foreign disclosure procedures.
+
+#### Releasable To
+
+The `releasableTo` attribute (Array[String]) identifies one or more countries and/or international organizations to which classified information may be released based on established foreign disclosure procedures.
+
+#### Classified By
+
+The `classifiedBy` attribute (String) identifies the original classification authority for a resource.  This attribute is primarily used at the resource level.
+
+## ISM Based on Classification
+
+This sections describes which attributes are required based on the classification of the resource.
+
+### Unclassified Information
+
+When dealing with unclassified information that has no limitations on dissemination, all ISM attributes are optional.  It is recommended however to include `version`, `classification`, and `ownerProducer` at the resource level.
+
+### Classified Information
+
+When dealing with classified information, the `classification` and `ownerProducer` attributes are required.  All other attributes are optional.

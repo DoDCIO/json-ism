@@ -1,10 +1,10 @@
-# JSON Security Marking Standard (JSON-SMS) --- DRAFT
+# JSON Information Security Marking Standard (JSON-ISM) --- DRAFT
 
 ## Introduction
 
 Department of Defense (DoD) policy requires the identification and protection of national security information and controlled unclassified information (CUI).  Department of Defense Manual (DoDM) 5200.01, Volumes 2 and 4 (referenced below) describe how to appropriately mark classified information and CUI to facilitate information sharing.  These markings are used (along with other factors) to make access/dissemination decisions.
 
-Exstensible Markup Language (XML) is widely used within the DoD to share information and a comprehensive marking standard called Information Security Marking Metadata (ISM or IC-ISM) has been made available by the Office of the Director of National Intelligence (referenced below).  We are not aware of any similar marking standards based on JavaScript Object Notation (JSON).  With the ever increasing popularity of REST APIs for sharing information between applications/systems, many now using JSON over XML, a standard for marking JSON documents has become necessary.  The JSON Security Marking Standard (JSON-SMS) aims to be that standard.
+Exstensible Markup Language (XML) is widely used within the DoD to share information and a comprehensive marking standard called Information Security Marking Metadata (ISM or IC-ISM) has been made available by the Office of the Director of National Intelligence (referenced below).  We are not aware of any similar marking standards based on JavaScript Object Notation (JSON).  With the ever increasing popularity of REST APIs for sharing information between applications/systems, many now using JSON over XML, a standard for marking JSON documents has become necessary.  The JSON Information Security Marking Standard (JSON-ISM) aims to be that standard.
 
 ## References
 
@@ -14,21 +14,21 @@ Exstensible Markup Language (XML) is widely used within the DoD to share informa
 
 ## Overview
 
-JSON-SMS facilitates marking information based upon the concept of Banner Lines (Resource Level) and Portion Markings (Portion Level) as described in the DoDM 5200.01 volumes.  JSON-SMS provides the attributes necessary for consumers to construct Banner Lines and Portion Markings to be used when displaying the information.  In addition, these attributes can be used when making access/dissemination decisions.  Where possible, JSON-SMS attempts to align with the ISM standard.
+JSON-ISM facilitates marking information based upon the concept of Banner Lines (Resource Level) and Portion Markings (Portion Level) as described in the DoDM 5200.01 volumes.  JSON-ISM provides the attributes necessary for consumers to construct Banner Lines and Portion Markings to be used when displaying the information.  In addition, these attributes can be used when making access/dissemination decisions.  Where possible, JSON-ISM attempts to align with the IC-ISM standard.
 
-JSON-SMS is only a marking standard.  It remains the responsibility of the data owner(s) to ensure information is appropriately marked and those in possession of classified information or CUI are responsible for its protection.
+JSON-ISM is only a marking standard.  It remains the responsibility of the data owner(s) to ensure information is appropriately marked and those in possession of classified information or CUI are responsible for its protection.
 
-## JSMS Object
+## ISM Object
 
-JSON-SMS attributes will be grouped together to form an object.  This object can be used at both the resource level (overall document) and the portion level (individual attribute).  
+ISM attributes will be grouped together to form an object.  This object can be used at both the resource level (overall document) and the portion level (individual attribute).  
 
-The object is identified at the resource level using the `jsms` key.  This key is placed at the root level of the JSON document.
+The object is identified at the resource level using the `ism` key.  This key is placed at the root level of the JSON document.
 
 **Marking at the resource level (equivalent to Banner Line for overall document classification)**
 ```json
 {
-  "jsms":{
-    -- JSON-SMS Attributes --
+  "ism":{
+    "version": "1",
   },
   "data":{
     ...
@@ -36,7 +36,7 @@ The object is identified at the resource level using the `jsms` key.  This key i
 }
 ```
 
-The object is identified at the portion level using the attribute name plus the `_jsms` key suffix.  For example, if the key for the portion we wish to mark is `description`, the key for the JSMS object would be `description_jsms`.
+The object is identified at the portion level using the attribute name plus the `_ism` key suffix.  For example, if the key for the portion we wish to mark is `description`, the key for the ISM object would be `description_ism`.
 
 **Marking at the portion level (equivalent to Portion Marking for identifying portions within a document)**
 ```json
@@ -45,8 +45,8 @@ The object is identified at the portion level using the attribute name plus the 
   "data":{
     "programName": "Nonsensitive Program Name",
     "description": "Sensitive Description",
-    "description_jsms": {
-      -- JSON-SMS Attributes --
+    "description_ism": {
+      -- ISM Attributes --
     },
     ...
   }
@@ -55,11 +55,11 @@ The object is identified at the portion level using the attribute name plus the 
 
 ### Attributes
 
-The following is a list of JSMS object attributes.  These attributes provide the information necessary to construct Banner Lines and Portion Markings.
+The following is a list of ISM object attributes.  These attributes provide the information necessary to construct Banner Lines and Portion Markings.
 
-#### JSON-SMS Version
+#### JSON-ISM Version
 
-The `version` attribute identifies the version of JSON-SMS being used.
+The `version` attribute (String) identifies the version of JSON-SMS being used (for the entire document).  This attribute is only used at the resource level.
 
 #### Classification
 
@@ -82,7 +82,7 @@ The possible values for `classification` are:
 
 #### Owner Producer
 
-The `ownerProducer` attribute (Array[String]) is used to identify one or more national governments or international organizations that have purview over the classification marking of a resource or portion therein. This attribute is always used in conjunction with the `ownerProducer` attribute.  Taken together, these two attributes specify the classification category and type of classification (US, non-US, or Joint).
+The `ownerProducer` attribute (Array[String]) is used to identify one or more national governments or international organizations that have purview over the classification marking of a resource or portion therein. This attribute is always used in conjunction with the `classification` attribute.  Taken together, these two attributes specify the classification category and type of classification (US, non-US, or Joint).
 
 **Example**
 ```json

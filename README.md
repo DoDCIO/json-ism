@@ -20,7 +20,9 @@ JSON-ISM is only a marking standard.  It remains the responsibility of the data 
 
 ## Distribution Notice
 
-All data contained within this repo (including this file) is `UNCLASSIFIED`.  Classification markings are for illustration purposes only.
+All data contained within this repo (including this file) is `UNCLASSIFIED`.
+
+> :warning: Classification markings are for illustration purposes only.
 
 ## ISM Object
 

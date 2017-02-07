@@ -1559,3 +1559,25 @@ The `declassEvent` attribute (String) is used primarily at the resource level. A
 ### Declassification Exception
 
 The `declassException` attribute (String) is used primarily at the resource level. A single indicator describing an exemption to the nominal 25-year point for automatic declassification. This element is used in conjunction with the `declassDate` or `declassEvent`. It is manifested in the 'Declassify On' line of a resource's classification authority block. ISOO has stated it should be a SINGLE value giving the longest protection.
+
+The possible values for `declassException` are:
+
+| Value | Description |
+| ----- | ----------- |
+| AEA |  When using a source document that contains portions of Restricted Data (RD) or Formerly Restricted Data (FRD) where the RD/FRD source document(s) do not have declassification instructions, the derivatively classified document shall not contain a declassification date or event on the Declassify On line. The following shall be annotated on the Declassify On line: "Not Applicable or (N/A) to RD/FRD portions" and "See source list for NSI portions" separated by a period. The source list must include the declassification instruction for each of the source documents classified under E.O. 13526 and shall not appear in the classification authority block  |
+| NATO |  Since NATO information is not to be declassified or downgraded without the prior consent of NATO, the “Declassify on” line of documents that commingle information classified by NATO and U.S. classified NSI, will read “N/A to NATO portions. See source list for NSI portions.” The NSI source list will appear beneath the classification authority block in a manner that clearly identifies it as separate and distinct.  |
+| NATO-AEA |  Handles special case of BOTH NATO and AEA as a single exemption.  |
+| 25X1 |  Reveal the identity of a confidential human source, a human intelligence source, a relationship with an intelligence or security service of a foreign government or international organization, or a non-human intelligence source; or impair the effectiveness of an intelligence method currently in use, available for use, or under development.  |
+| 25X1-EO-12951 |  "25X1, EO 12951" (prescribed by the DNI for use on information described in E.O. 12951, Release of Imagery Acquired by Space-Based National Intelligence Reconnaissance Systems)  |
+| 25X2 |  Reveal information that would assist in the development, production, or use of weapons of mass destruction.  |
+| 25X3 |  Reveal information that would impair U.S. cryptologic systems or activities.  |
+| 25X4 |  Reveal information that would impair the application of state-of-the-art technology within a U.S. weapon system.  |
+| 25X5 |  Reveal formally named or numbered U.S. military war plans that remain in effect, or reveal operational or tactical elements of prior plans that are contained in such active plans; |
+| 25X6 |  Reveal information, including foreign government information, that would cause serious harm to relations between the United States and a foreign government, or to ongoing diplomatic activities of the United States  |
+| 25X7 |  Reveal information that would impair the current ability of United States Government officials to protect the President, Vice President, and other protectees for whom protection services, in the interest of the national security, are authorized.  |
+| 25X8 |  Reveal information that would seriously impair current national security emergency preparedness plans or reveal current vulnerabilities of systems, installations, or infrastructures relating to the national security.  |
+| 25X9 |  Violate a statute, treaty, or international agreement that does not permit the automatic or unilateral declassification of information at 25 years.  |
+| 50X1-HUM |  When the information clearly and demonstrably could be expected to reveal the identity of a confidential human source or a human intelligence source.  |
+| 50X1 |  The ISCAP has authorized use of this code in the FBI’s classification guidance (which results in a 75-year classification period) for any agency sourcing/reusing the information.  |
+| 50X2-WMD |  When the information clearly and demonstrably could reveal key design concepts of weapons of mass destruction.  |
+| 50X6 |  The ISCAP has authorized use of this code in the FBI’s classification guidance (which results in a 75-year classification period) for any agency sourcing/reusing the information.  | 

@@ -20,7 +20,7 @@ To create a question, use the [same process for creating an issue](https://help.
 
 ## Pull Request Process
 
-The `master` branch is a reserved branch that cannot be pushed to directly and can only be altered by submitting a pull request to the branch.  In fact, no branches 
+The `master` branch is a reserved branch that cannot be pushed to directly and can only be altered by submitting a pull request to the branch.  In fact, no `write` actions can be performed on the main EADS repository unless you are a member of the EADS team.  (Foreshadowing the need for forking)
 
 The process for creating a pull request is...
 * Create a fork of the JSON-ISM Standard Repo.  To learn more about creating a fork, please visit [Fork a Repo](https://help.github.com/articles/fork-a-repo/).

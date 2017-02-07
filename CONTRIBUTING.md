@@ -33,7 +33,7 @@ The process for creating a pull request is...
 git push origin feature/readme-typo
 ```
 
-* Then create a pull request on GitHub from your forked branch to the `develop` branch (base branch) of the main JSON-ISM Standard repository.  Click to find more information on [Creating a Pull Request](https://help.github.com/articles/creating-a-pull-request/).
+* Then create a pull request on GitHub from your forked branch to the `develop` branch (base branch) of the main JSON-ISM Standard repository.  Click to find more information on [Creating a Pull Request From a Fork](https://help.github.com/articles/creating-a-pull-request-from-a-fork/)
 
 * The pull request will then be reviewed by EADS team.
 

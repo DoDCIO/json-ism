@@ -18,6 +18,10 @@ JSON-ISM facilitates marking information based upon the concept of Banner Lines 
 
 JSON-ISM is only a marking standard.  It remains the responsibility of the data owner(s) to ensure information is appropriately marked and those in possession of classified information or CUI are responsible for its protection.
 
+## Distribution Notice
+
+All data contained within this repo (including this file) is `UNCLASSIFIED`.  Classification markings are for illustration purposes only.
+
 ## ISM Object
 
 ISM attributes will be grouped together to form an object.  This object can be used at both the resource level (overall document) and the portion level (individual attribute).  
@@ -38,7 +42,7 @@ The object is identified at the resource level using the `ism` key.  This key is
 }
 ```
 
-The object is identified at the portion level using the attribute name plus the `_ism` key suffix.  For example, if the key for the portion we wish to mark is `description`, the key for the ISM object would be `description_ism`.
+The object is identified at the portion level using the attribute name plus the `Ism` key suffix.  For example, if the key for the portion we wish to mark is `description`, the key for the ISM object would be `descriptionIsm`.
 
 **Marking at the portion level (equivalent to Portion Marking for identifying portions within a document)**
 ```json
@@ -47,7 +51,7 @@ The object is identified at the portion level using the attribute name plus the 
   "data":{
     "programName": "Nonsensitive Program Name",
     "description": "Sensitive Description",
-    "description_ism": {
+    "descriptionIsm": {
       "classification": "U",
       "ownerProducer": "USA"
     },
@@ -56,15 +60,27 @@ The object is identified at the portion level using the attribute name plus the 
 }
 ```
 
-### Attributes
+## ISM Based on Classification
+
+This sections describes which attributes of the ism object are required based on the sensitivity of the information.
+
+### Unclassified Information
+
+When dealing with unclassified information that has no limitations on dissemination, all ISM attributes are optional.  It is recommended however to include `version`, `classification`, and `ownerProducer` at the resource level.
+
+### Classified Information
+
+When dealing with classified information, the `classification` and `ownerProducer` attributes are required.  All other attributes are optional.
+
+## Attributes
 
 The following is a list of ISM object attributes.  These attributes provide the information necessary to construct Banner Lines and Portion Markings.
 
-#### JSON-ISM Version
+### JSON-ISM Version
 
 The `version` attribute (String) identifies the version of JSON-SMS being used (for the entire document).  This attribute is only used at the resource level.
 
-#### Classification
+### Classification
 
 The `classification` attribute (String) is used to identify the highest classification of information included within a document (Banner Line - Resource Level) or within a given portion of a document (Portion Marking - Portion Level).  This attribute is always used in conjunction with the `ownerProducer` attribute.  Taken together, these two attributes specify the classification category and type of classification (US, non-US, or Joint).
 
@@ -83,7 +99,7 @@ The possible values for `classification` are:
   "classification": "U"
 ```
 
-#### Owner Producer
+### Owner Producer
 
 The `ownerProducer` attribute (Array[String]) is used to identify one or more national governments or international organizations that have purview over the classification marking of a resource or portion therein. This attribute is always used in conjunction with the `classification` attribute.  Taken together, these two attributes specify the classification category and type of classification (US, non-US, or Joint).
 
@@ -94,7 +110,16 @@ The `ownerProducer` attribute (Array[String]) is used to identify one or more na
   ]
 ```
 
-#### SCI Controls
+### Joint
+
+The `joint` attribute (Boolean), when true, is used to signify that multiple values in the `ownerProducer` attribute are JOINT owners of the data.
+
+**Example**
+```json
+  "joint": true
+```
+
+### SCI Controls
 
 The `sciControls` attribute (Array[String]) identifies one or more sensitive compartmented information control systems.
 
@@ -136,7 +161,7 @@ The possible values for `sciControls` are:
   ]
 ```
 
-#### SAR Identifiers
+### SAR Identifiers
 
 The `sarIdentifiers` attribute (Array[String]) identifies one or more defense or intelligence programs for which special access is required.
 
@@ -149,7 +174,7 @@ The possible patterns for `sarIdentifiers` are:
 | [A-Z]{2,}-[A-Z][A-Z0-9]+ | SPECIAL ACCESS REQUIRED-XXX, the Digraph or Trigraph of the SAR is represented by the XXX |
 | [A-Z]{2,}-[A-Z][A-Z0-9]+-[A-Z0-9]{2,} | SPECIAL ACCESS REQUIRED-XXX, the Digraph or Trigraph of the SAR is represented by the XXX |
 
-#### Atomic Energy Markings
+### Atomic Energy Markings
 
 The `atomicEnergyMarkings` attribute (Array[String]) identifies one or more Department of Energy (DoE) markings.
 
@@ -171,7 +196,7 @@ The possible values for `atomicEnergyMarkings` are:
 | UCNI | DoE CONTROLLED NUCLEAR INFORMATION |
 | TFNI | TRANSCLASSIFIED FOREIGN NUCLEAR INFORMATION |
 
-#### Dissemination Controls
+### Dissemination Controls
 
 The `disseminationControls` attribute (Array[String]) identifies one or more indicators for expanding or limiting the distribution of information.
 
@@ -193,7 +218,43 @@ The possible values for `disseminationControls` are:
 | FISA | FOREIGN INTELLIGENCE SURVEILLANCE ACT |
 | DISPLAYONLY | AUTHORIZED FOR DISPLAY BUT NOT RELEASE TO |
 
-#### Non-IC Markings
+### Display Only To
+
+The `displayOnlyTo` attribute (Array[String]) identifies one or more countries and/or international organizations to which classified information may be displayed but NOT released based on the determination of an originator in accordance with established foreign disclosure procedures. This attribute is used in conjunction with the `DISPLAYONLY` value of the `disseminationControls` attribute.
+
+The possible values for `displayOnlyTo` are:
+
+| Value | Description |
+| ----- | ----------- |
+
+### FGI Source Open
+
+The `fgiSourceOpen` attribute (Array[String]) identifies information which qualifies as foreign government information for which the source(s) of the information is not concealed. The attribute can indicate that the source of information of foreign origin is `UNKNOWN`.
+
+The possible values for `fgiSourceOpen` are:
+
+| Value | Description |
+| ----- | ----------- |
+
+### FGI Source Protected
+
+The `fgiSourceProtected` attribute (Array[String]) has unique specific rules concerning its usage. A single indicator that information qualifies as foreign government information for which the source(s) of the information must be concealed. Within protected internal organizational spaces this element may be used to maintain a record of the one or more indicators identifying information which qualifies as foreign government information for which the source(s) of the information must be concealed. Measures must be taken prior to dissemination of the information to conceal the source(s) of the foreign government information. An indication that information qualifies as foreign government information according to CAPCO guidelines for which the source(s) of the information must be concealed when the information is disseminated in shared spaces This data element has a dual purpose. Within shared spaces, the data element serves only to indicate the presence of information which is categorized as foreign government information according to CAPCO guidelines for which the source(s) of the information is concealed, in which case, this data element's value will always be `FGI`. The data element may also be employed in this manner within protected internal organizational spaces. However, within protected internal organizational spaces this data element may alternatively be used to maintain a formal record of the foreign country or countries and/or registered international organization(s) that are the non-disclosable owner(s) and/or producer(s) of information which is categorized as foreign government information according to CAPCO guidelines for which the source(s) of the information must be concealed when the resource is disseminated to shared spaces. If the data element is employed in this manner, then additional measures must be taken prior to dissemination of the resource to shared spaces so that any indications of the non-disclosable owner(s) and/or producer(s) of information within the resource are eliminated. In all cases, the corresponding portion marking or banner marking should be compliant with CAPCO guidelines for FGI when the source must be concealed. In other words, even if the data element is being employed within protected internal organizational spaces to maintain a formal record of the non-disclosable owner(s) and/or producer(s), if the resource is rendered for display within the protected internal organizational spaces in any format by a stylesheet or as a result of any other transformation process, then the non-disclosable owner(s) and/or producer(s) should not be included in the corresponding portion marking or banner marking.
+
+The possible values for `fgiSourceProtected` are:
+
+| Value | Description |
+| ----- | ----------- |
+
+### Releasable To
+
+The `releasableTo` attribute (Array[String]) identifies one or more countries and/or international organizations to which classified information may be released based on the determination of an originator in accordance with established foreign disclosure procedures.  This attribute is used in conjunction with the `disseminationControls` attribute.
+
+The possible values for `releasableTo` are:
+
+| Value | Description |
+| ----- | ----------- |
+
+### Non-IC Markings
 
 The `nonICmarkings` attribute (Array[String]) identifies one or more indicators for expanding or limiting the distribution of information originating from non-intelligence components.
 
@@ -217,26 +278,46 @@ The possible values for `nonICmarkings` are:
 | LES-NF | LAW ENFORCEMENT SENSITIVE NOFORN |
 | SSI | SENSITIVE SECURITY INFORMATION |
 
-#### Display Only To
+### Classified By
 
-The `displayOnlyTo` attribute (Array[String]) identifies one or more countries and/or international organizations to which classified information may be displayed but NOT released based on established foreign disclosure procedures.
+The `classifiedBy` attribute (String) is used primarily at the resource level. The identity, by name or personal identifier, and position title of the original classification authority for a resource. It is manifested only in the 'Classified By' line of a resource's classification authority block.
 
-#### Releasable To
+### Compilation Reason
 
-The `releasableTo` attribute (Array[String]) identifies one or more countries and/or international organizations to which classified information may be released based on established foreign disclosure procedures.
+The `compilationReason` attribute (String) is a description of the reasons that the classification of this element is more restrictive than a simple roll-up of the sub elements would result in. This acts as an indicator to rule engines that there is not accidental over classification going on and to users that special care beyond what the portion marks reveal must be taken when using this data. Use of this mark does not replace the need for the compilation reason being defined in the prose in accordance with ISOO Directive 1. For example this would document why 3 Unclassified bullet items form a Secret List. Without this reason being noted the above described document would be considered to be miss-marked and overclassified.
 
-#### Classified By
+### Derivatively Classified By
 
-The `classifiedBy` attribute (String) identifies the original classification authority for a resource.  This attribute is primarily used at the resource level.
+The `derivativelyClassifiedBy` attribute (String) is used primarily at the resource level. The identity, by name or personal identifier, of the derivative classification authority. It is manifested only in the 'Classified By' line of a resource's classification authority block.
 
-## ISM Based on Classification
+### Classification Reason
 
-This sections describes which attributes are required based on the classification of the resource.
+The `classificationReason` attribute (String) is used primarily at the resource level. One or more reason indicators or explanatory text describing the basis for an original classification decision. It is manifested only in the 'Reason' line of a resource's classification authority block.
 
-### Unclassified Information
+### Non-US Controls
 
-When dealing with unclassified information that has no limitations on dissemination, all ISM attributes are optional.  It is recommended however to include `version`, `classification`, and `ownerProducer` at the resource level.
+The `nonUSControls` attribute (Array[String]) identifies one or more indicators for expanding or limiting the distribution of information originating from non-US components.
 
-### Classified Information
+The possible values for `nonUSControls` are:
 
-When dealing with classified information, the `classification` and `ownerProducer` attributes are required.  All other attributes are optional.
+| Value | Description |
+| ----- | ----------- |
+| ATOMAL | NATO Atomal mark |
+| BOHEMIA | NATO Bohemia mark |
+| BALK | NATO Balk mark |
+
+### Derived From
+
+The `derivedFrom` attribute (String) is used primarily at the resource level. A citation of the authoritative source or reference to multiple sources of the classification markings used in a classified resource. It is manifested only in the 'Derived From' line of a document's classification authority block. ISOO's guidance is: Source of derivative classification. (1) The derivative classifier shall concisely identify the source document or the classification guide on the ‘‘Derived From’’ line, including the agency and, where available, the office of origin, and the date of the source or guide. An example might appear as: Derived From: Memo, ‘‘Funding Problems,’’ October 20, 2008, Office of Administration, Department of Good Works or Derived From: CG No. 1, Department of Good Works, dated October 20, 2008 (i) When a document is classified derivatively on the basis of more than one source document or classification guide, the ‘‘Derived From’’ line shall appear as: Derived From: Multiple Sources (ii) The derivative classifier shall include a listing of the source materials on, or attached to, each derivatively classified document.
+
+### Declassification Date
+
+The `declassDate` attribute (Date) is used primarily at the resource level. A specific year, month, and day upon which the information shall be automatically declassified if not properly exempted from automatic declassification. It is manifested in the 'Declassify On' line of a resource's classification authority block.
+
+### Declassification Event
+
+The `declassEvent` attribute (String) is used primarily at the resource level. A description of an event upon which the information shall be automatically declassified if not properly exempted from automatic declassification. It is manifested only in the 'Declassify On' line of a resource's classification authority block.
+
+### Declassification Exception
+
+The `declassException` attribute (String) is used primarily at the resource level. A single indicator describing an exemption to the nominal 25-year point for automatic declassification. This element is used in conjunction with the `declassDate` or `declassEvent`. It is manifested in the 'Declassify On' line of a resource's classification authority block. ISOO has stated it should be a SINGLE value giving the longest protection.

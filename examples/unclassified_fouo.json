@@ -1,0 +1,22 @@
+{
+  "ism":{
+    "version": "1",
+    "classification": "U",
+    "ownerProducer": "USA",
+    "disseminationControls": [
+      "FOUO"
+    ]
+  },
+  "data":{
+    "programName": "Sensitive Program Name",
+    "programNameIsm" : {
+      "classification": "U",
+      "ownerProducer": "USA",
+      "disseminationControls": [
+        "FOUO"
+      ]
+    },
+    "description": "This is a sample response containing UNCLASSIFIED//FOUO information.  Classification markings are for illustration purposes only.",
+    "createdAt": "2013-02-27-T10:00:00Z"
+  }
+}

@@ -1,3 +1,3 @@
 # Examples
 
-This directory will contain examples of JSON documents marked using JSON-IMS.
+This directory contains example JSON documents marked using JSON-ISM.

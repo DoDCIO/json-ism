@@ -18,11 +18,11 @@ JSON-ISM facilitates marking information based upon the concept of Banner Lines 
 
 JSON-ISM is only a marking standard.  It remains the responsibility of the data owner(s) to ensure information is appropriately marked and those in possession of classified information or CUI are responsible for its protection.
 
-## Distribution Notice
+## Distribution Notice :warning:
 
 All data contained within this repo (including this file) is `UNCLASSIFIED`.
 
-> :warning: Classification markings are for illustration purposes only.
+> Classification markings are for illustration purposes only.
 
 ## ISM Object
 
@@ -55,7 +55,10 @@ The object is identified at the portion level using the attribute name plus the 
     "description": "Sensitive Description",
     "descriptionIsm": {
       "classification": "U",
-      "ownerProducer": "USA"
+      "ownerProducer": "USA",
+      "disseminationControls": [
+        "FOUO"
+      ]
     },
     ...
   }
@@ -1580,4 +1583,4 @@ The possible values for `declassException` are:
 | 50X1-HUM |  When the information clearly and demonstrably could be expected to reveal the identity of a confidential human source or a human intelligence source.  |
 | 50X1 |  The ISCAP has authorized use of this code in the FBI’s classification guidance (which results in a 75-year classification period) for any agency sourcing/reusing the information.  |
 | 50X2-WMD |  When the information clearly and demonstrably could reveal key design concepts of weapons of mass destruction.  |
-| 50X6 |  The ISCAP has authorized use of this code in the FBI’s classification guidance (which results in a 75-year classification period) for any agency sourcing/reusing the information.  | 
+| 50X6 |  The ISCAP has authorized use of this code in the FBI’s classification guidance (which results in a 75-year classification period) for any agency sourcing/reusing the information.  |

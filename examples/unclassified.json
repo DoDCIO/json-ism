@@ -2,7 +2,9 @@
   "ism":{
     "version": "1",
     "classification": "U",
-    "ownerProducer": "USA"
+    "ownerProducer": [
+      "USA"
+    ]
   },
   "data":{
     "programName": "Nonsensitive Program Name",

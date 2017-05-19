@@ -36,7 +36,9 @@ The object is identified at the resource level using the `ism` key.  This key is
   "ism":{
     "version": "1",
     "classification": "U",
-    "ownerProducer": "USA"
+    "ownerProducer": [
+      "USA"
+    ]
   },
   "data":{
     ...
@@ -55,7 +57,9 @@ The object is identified at the portion level using the attribute name plus the 
     "description": "Sensitive Description",
     "descriptionIsm": {
       "classification": "U",
-      "ownerProducer": "USA",
+      "ownerProducer": [
+        "USA"
+      ],
       "disseminationControls": [
         "FOUO"
       ]

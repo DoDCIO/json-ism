@@ -2,7 +2,9 @@
   "ism":{
     "version": "1",
     "classification": "U",
-    "ownerProducer": "USA",
+    "ownerProducer": [
+      "USA"
+    ],
     "disseminationControls": [
       "FOUO"
     ]
@@ -11,7 +13,9 @@
     "programName": "Sensitive Program Name",
     "programNameIsm" : {
       "classification": "U",
-      "ownerProducer": "USA",
+      "ownerProducer": [
+        "USA"
+      ],
       "disseminationControls": [
         "FOUO"
       ]
